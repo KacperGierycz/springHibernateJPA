@@ -11,6 +11,8 @@ import javax.persistence.PersistenceUnit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import mine.learning.springbootjpaexample.models.EmployeeLimited;
+
 @SpringBootApplication
 public class SpringbootjpaexampleApplication {
 	
@@ -26,7 +28,7 @@ public class SpringbootjpaexampleApplication {
 	
 	@PostConstruct
 	public void start() {
-		Employee e = new Employee();
+		EmployeeLimited e = new EmployeeLimited();
 		e.setAge(20);
 		e.setDob(new Date());
 		e.setName("Fello");
