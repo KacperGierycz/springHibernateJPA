@@ -9,15 +9,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import mine.learning.springbootjpaexample.models.EmployeeLimited;
 import mine.learning.springbootjpaexample.repository.EmployeeRepository;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class SpringbootjpaexampleApplication {
 	
 //	@PersistenceUnit
@@ -48,7 +51,10 @@ public class SpringbootjpaexampleApplication {
 		Optional<EmployeeLimited> empl1 = employeeRepository.findById(1);
 		if (empl1.isPresent()) {
 		System.out.println(empl1.get());
+		updateEmployee(empl1.get());
+		
 		}
+		
 		
 		
 		
@@ -62,6 +68,14 @@ public class SpringbootjpaexampleApplication {
 //		EmployeeLimited employee = entityManager.find(EmployeeLimited.class, 1);
 //		System.out.println(employee);
 		
+	}
+
+	@Transactional
+	private void updateEmployee(EmployeeLimited empl1) {
+		
+		
+		empl1.setName("new Name for empl1");
+		employeeRepository.save(empl1); 
 	}
 
 }
